@@ -7,8 +7,14 @@ var esprima = require('esprima'),
 
 var handlers = {
 
-    // TODO: YAHOO.util.Connect.initHeader => à intégrer à l'appel de YAHOO.util.Connect.asyncRequest
-    // TODO: YAHOO.util.Connect.setDefaultPostHeader
+
+    "YAHOO.util.Connect.setDefaultPostHeader": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "// TODO: YAHOO.util.Connect.setDefaultPostHeader"
+        };
+        return [];
+    },
 
     "YAHOO.util.Connect.initHeader": function (node, path) {
         node.callee = {

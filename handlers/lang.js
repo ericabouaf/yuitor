@@ -8,12 +8,12 @@ var esprima = require('esprima'),
 
 var handlers = {
 
-    /* TODO: "YAHOO.lang.later": function (node, path) {
+    "YAHOO.lang.later": function (node, path) {
         node.callee = {
             "type": "Identifier",
-            "name": "Y.extend"
+            "name": "Y.later"
         };
-    },*/
+    },
 
     "YAHOO.lang.extend": function (node, path) {
         node.callee = {
@@ -21,6 +21,24 @@ var handlers = {
             "name": "Y.extend"
         };
 
+        return [];
+    },
+
+    "YAHOO.lang.isUndefined": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.Lang.isUndefined"
+        };
+        
+        return [];
+    },
+
+    "YAHOO.lang.isValue": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.Lang.isValue"
+        };
+        
         return [];
     },
 

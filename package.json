@@ -1,0 +1,24 @@
+{
+    "name": "yuitor",
+    "version": "0.1.0",
+    "description": "Experimental automatic conversion fro YUI2 to YUI3",
+    "author": "Eric Abouaf <eric.abouaf@gmail.com>",
+    "bugs": { "web" : "http://github.com/neyric/yuitor/issues" },
+    "contributors": [
+        "Eric Abouaf <eric.abouaf@gmail.com> (http://neyric.com)"
+    ],
+    "bin" : {
+       "yuitor" : "./bin/yuitor.js"
+    },
+    "dependencies": {
+        "esprima": "1.0.2",
+        "escodegen": "0.0.15",
+        "yproject": "2.0.0"
+    },
+    "licenses":[
+    ],
+    "repository": {
+        "type":"git",
+        "url":"http://github.com/neyric/yuitor.git"
+    }
+}
