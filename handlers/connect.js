@@ -7,6 +7,7 @@ var esprima = require('esprima'),
 
 var handlers = {
 
+    // TODO: YAHOO.util.Connect.abort
 
     "YAHOO.util.Connect.setDefaultPostHeader": function (node, path) {
         node.callee = {

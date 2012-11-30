@@ -16,6 +16,8 @@ var handlers = {
 
     
     // TODO: YAHOO.util.CustomEvent
+    // TODO: YAHOO.util.Event.purgeElement
+    // TODO: YAHOO.util.Event.delegate
 
 
     "YAHOO.util.Event.onDOMReady": function (node, path) {

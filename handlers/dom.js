@@ -16,10 +16,13 @@ var yui2nodeId = function (node) {
 var handlers = {
 
     // TODO: YAHOO.util.Dom.getChildrenBy
-    // TODO: YAHOO.util.Dom.insertBefore
-    // TODO: YAHOO.util.Dom.insertAfter
     // TODO: YAHOO.util.Dom.getElementsBy
+    // TODO: YAHOO.util.Dom.getAncestorByClassName
+
+    // TODO: YAHOO.util.Dom.getRegion
     
+    // TODO: YAHOO.util.Dom.setAttribute
+    // TODO: YAHOO.util.Dom.setY
 
     "YAHOO.util.Dom.getViewportHeight": function (node, path) {
         
@@ -37,6 +40,21 @@ var handlers = {
     },
 
 
+
+    "YAHOO.util.Dom.insertAfter": function (node, path) {
+        
+        node.callee = {
+            "type": "Identifier",
+            "name": escodegen.generate(node.arguments[1])+".insertAfter"
+        };
+
+        node.arguments[1] = {
+            "type": "Literal",
+            "value": "after"
+        };
+
+        return ['node'];
+    },
 
     "YAHOO.util.Dom.insertBefore": function (node, path) {
         

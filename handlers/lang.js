@@ -8,6 +8,20 @@ var esprima = require('esprima'),
 
 var handlers = {
 
+    "YAHOO.lang.augmentObject": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.mix"
+        };
+    },
+
+    "YAHOO.lang.merge": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.merge"
+        };
+    },
+
     "YAHOO.lang.later": function (node, path) {
         node.callee = {
             "type": "Identifier",
@@ -69,6 +83,15 @@ var handlers = {
         return [];
     },
 
+
+    "YAHOO.lang.isString": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.Lang.isString"
+        };
+        
+        return [];
+    },
 
     "YAHOO.lang.isObject": function (node, path) {
         node.callee = {
