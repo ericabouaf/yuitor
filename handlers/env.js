@@ -2,29 +2,20 @@
 
 "use strict";
 
-var esprima = require('esprima'),
-    escodegen = require('escodegen');
+/*var esprima = require('esprima'),
+    escodegen = require('escodegen');*/
 
-
-var handlers = {
+var memberHandlers = {
 
 
     "YAHOO.env.ua.ie": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Env.ua.ie"
-        };
-
-        return [];
+        node.type = "Identifier";
+        node.name = "Y.Env.ua.ie";
     },
 
     "YAHOO.env.ua.gecko": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Env.ua.gecko"
-        };
-
-        return [];
+        node.type = "Identifier";
+        node.name = "Y.Env.ua.gecko";
     }
 
 
@@ -32,6 +23,4 @@ var handlers = {
 
 
 
-exports.handlers = handlers;
-
-// TODO 
+exports.memberHandlers = memberHandlers;

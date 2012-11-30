@@ -1,12 +1,48 @@
+/*jshint node:true*/
+"use strict";
 
-// TODO: YAHOO.widget.Button
+var esprima = require('esprima'),
+    escodegen = require('escodegen');
 
-// TODO: YAHOO.widget.ButtonGroup
+var calleeHandlers = {
 
+    // TODO: YAHOO.widget.Button
+    // TODO: YAHOO.widget.ButtonGroup
+    // TODO: YAHOO.widget.AutoComplete
+    // TODO: YAHOO.widget.Menu
 
-// TODO: YAHOO.widget.Panel
+    "YAHOO.widget.Menu": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.Menu"
+        };
+        return ['menu'];
+    },
 
+    "YAHOO.widget.Calendar": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.Calendar"
+        };
+        return ['calendar'];
+    },
 
-// TODO: YAHOO.widget.AutoComplete
+    "YAHOO.widget.Panel": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.Panel"
+        };
+        return ['panel'];
+    },
 
-// TODO: YAHOO.widget.Menu
+    "YAHOO.widget.TabView": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.TabView"
+        };
+        return ['tabview'];
+    }
+
+};
+
+exports.calleeHandlers = calleeHandlers;

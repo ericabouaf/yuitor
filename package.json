@@ -15,6 +15,12 @@
         "escodegen": "0.0.15",
         "yproject": "2.0.0"
     },
+    "devDependencies": {
+        "vows": "0.6.4"
+    },
+    "scripts": {
+        "test": "vows --spec tests/*"
+    },
     "licenses":[
     ],
     "repository": {

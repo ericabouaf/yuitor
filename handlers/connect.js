@@ -5,9 +5,21 @@
 var esprima = require('esprima'),
     escodegen = require('escodegen');
 
-var handlers = {
+var calleeHandlers = {
 
     // TODO: YAHOO.util.Connect.abort
+
+    "YAHOO.util.Connect.abort": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": escodegen.generate(node.arguments[0]) + ".abort"
+        };
+
+        node.arguments.shift();
+
+        return [];
+    },
+
 
     "YAHOO.util.Connect.setDefaultPostHeader": function (node, path) {
         node.callee = {
@@ -66,5 +78,5 @@ var handlers = {
 
 };
 
-exports.handlers = handlers;
+exports.calleeHandlers = calleeHandlers;
 

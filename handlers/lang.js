@@ -5,109 +5,35 @@
 var esprima = require('esprima'),
     escodegen = require('escodegen');
 
-
-var handlers = {
-
-    "YAHOO.lang.augmentObject": function (node, path) {
+function simple_rename(destFn) {
+    return function (node, path) {
         node.callee = {
             "type": "Identifier",
-            "name": "Y.mix"
+            "name": destFn
         };
-    },
-
-    "YAHOO.lang.merge": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.merge"
-        };
-    },
-
-    "YAHOO.lang.later": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.later"
-        };
-    },
-
-    "YAHOO.lang.extend": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.extend"
-        };
-
         return [];
-    },
+    }
+};
 
-    "YAHOO.lang.isUndefined": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Lang.isUndefined"
-        };
-        
-        return [];
-    },
+var calleeHandlers = {
 
-    "YAHOO.lang.isValue": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Lang.isValue"
-        };
-        
-        return [];
-    },
-
-    "YAHOO.lang.isArray": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Lang.isArray"
-        };
-        
-        return [];
-    },
-
-    "YAHOO.lang.isNull": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Lang.isNull"
-        };
-        
-        return [];
-    },
-
-    "YAHOO.lang.isFunction": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Lang.isFunction"
-        };
-        
-        return [];
-    },
-
-
-    "YAHOO.lang.isString": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Lang.isString"
-        };
-        
-        return [];
-    },
-
-    "YAHOO.lang.isObject": function (node, path) {
-        node.callee = {
-            "type": "Identifier",
-            "name": "Y.Lang.isObject"
-        };
-        
-        return [];
-    },
+    "YAHOO.lang.augmentObject": simple_rename("Y.mix"),
+    "YAHOO.lang.merge": simple_rename("Y.merge"),
+    "YAHOO.lang.later": simple_rename("Y.later"),
+    "YAHOO.lang.extend": simple_rename("Y.extend"),
+    "YAHOO.lang.isUndefined": simple_rename("Y.Lang.isUndefined"),
+    "YAHOO.lang.isValue": simple_rename("Y.Lang.isValue"),
+    "YAHOO.lang.isArray": simple_rename("Y.Lang.isArray"),
+    "YAHOO.lang.isNull": simple_rename("Y.Lang.isNull"),
+    "YAHOO.lang.isFunction": simple_rename("Y.Lang.isFunction"),
+    "YAHOO.lang.isString": simple_rename("Y.Lang.isString"),
+    "YAHOO.lang.isObject": simple_rename("Y.Lang.isObject"),
 
     "YAHOO.lang.JSON.parse": function (node, path) {
         node.callee = {
             "type": "Identifier",
             "name": "Y.JSON.parse"
         };
-
         return ['json-parse'];
     },
 
@@ -116,7 +42,6 @@ var handlers = {
             "type": "Identifier",
             "name": "Y.JSON.stringify"
         };
-
         return ['json-stringify'];
     }
 
@@ -124,13 +49,10 @@ var handlers = {
 };
 
 
-
-// Gestion des alias
-for (var k in handlers) {
+// Alias handling
+for (var k in calleeHandlers) {
     var langMethod = k.substr(11);
-    handlers["lang."+langMethod] = handlers[k];
+    calleeHandlers["lang."+langMethod] = calleeHandlers[k];
 }
 
-
-
-exports.handlers = handlers;
+exports.calleeHandlers = calleeHandlers;

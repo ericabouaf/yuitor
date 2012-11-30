@@ -6,7 +6,7 @@ var esprima = require('esprima'),
     escodegen = require('escodegen');
 
 
-var handlers = {
+var calleeHandlers = {
 
 
     "YAHOO.log": function (node, path) {
@@ -23,4 +23,4 @@ var handlers = {
 
 
 
-exports.handlers = handlers;
+exports.calleeHandlers = calleeHandlers;

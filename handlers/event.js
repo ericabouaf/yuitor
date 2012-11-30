@@ -12,7 +12,7 @@ var yui2nodeId = function (node) {
     }
 };
 
-var handlers = {
+var calleeHandlers = {
 
     
     // TODO: YAHOO.util.CustomEvent
@@ -111,13 +111,13 @@ var handlers = {
 
 
 // Gestion des alias
-for (var k in handlers) {
+for (var k in calleeHandlers) {
     var evtMethod = k.substr(17);
-    handlers["Event."+evtMethod] = handlers[k];
-    handlers["EVT."+evtMethod] = handlers[k];
+    calleeHandlers["Event."+evtMethod] = calleeHandlers[k];
+    calleeHandlers["EVT."+evtMethod] = calleeHandlers[k];
 }
 
 
 
-exports.handlers = handlers;
+exports.calleeHandlers = calleeHandlers;
 

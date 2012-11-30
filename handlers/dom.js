@@ -13,7 +13,7 @@ var yui2nodeId = function (node) {
 };
 
 
-var handlers = {
+var calleeHandlers = {
 
     // TODO: YAHOO.util.Dom.getChildrenBy
     // TODO: YAHOO.util.Dom.getElementsBy
@@ -40,6 +40,15 @@ var handlers = {
     },
 
 
+    "YAHOO.util.Element": function (node, path) {
+        
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.one"
+        };
+
+        return ['node'];
+    },
 
     "YAHOO.util.Dom.insertAfter": function (node, path) {
         
@@ -161,12 +170,12 @@ var handlers = {
 };
 
 // Gestion des alias
-for (var k in handlers) {
+for (var k in calleeHandlers) {
     var domMethod = k.substr(15);
-    handlers["Dom."+domMethod] = handlers[k];
-    handlers["DOM."+domMethod] = handlers[k];
+    calleeHandlers["Dom."+domMethod] = calleeHandlers[k];
+    calleeHandlers["DOM."+domMethod] = calleeHandlers[k];
 }
 
 
 
-exports.handlers = handlers;
+exports.calleeHandlers = calleeHandlers;

@@ -5,7 +5,7 @@
 var esprima = require('esprima'),
     escodegen = require('escodegen');
 
-var handlers = {
+var calleeHandlers = {
 
     "YAHOO.util.Cookie.remove": function (node, path) {
         node.callee = {
@@ -39,4 +39,4 @@ var handlers = {
 
 
 
-exports.handlers = handlers;
+exports.calleeHandlers = calleeHandlers;
