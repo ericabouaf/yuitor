@@ -12,12 +12,52 @@ var yui2nodeId = function (node) {
     }
 };
 
+
+var memberHandlers = {
+    "YAHOO.util.Event.throwErrors": function (node, path) {
+        node.type = "Identifier";
+        node.name = "YAHOO.util.Event.throwErrors";
+    }
+};
+exports.memberHandlers = memberHandlers;
+
+
 var calleeHandlers = {
 
-    
     // TODO: YAHOO.util.CustomEvent
-    // TODO: YAHOO.util.Event.purgeElement
-    // TODO: YAHOO.util.Event.delegate
+
+    "YAHOO.util.Event.removeListener": function (node, path) {
+        var firstArg = node.arguments.shift();
+        yui2nodeId(firstArg);
+
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.one("+escodegen.generate(firstArg)+").detach"
+        };
+        return ['node'];
+    },
+
+
+
+    "YAHOO.util.Event.purgeElement": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.Event.purgeElement"
+        };
+        return ['node'];
+    },
+
+
+    "YAHOO.util.Event.delegate": function (node, path) {
+        var firstArg = node.arguments.shift();
+        yui2nodeId(firstArg);
+
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.one("+escodegen.generate(firstArg)+").delegate"
+        };
+        return ['node'];
+    },
 
 
     "YAHOO.util.Event.onDOMReady": function (node, path) {

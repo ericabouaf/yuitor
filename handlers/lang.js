@@ -21,6 +21,8 @@ var calleeHandlers = {
     "YAHOO.lang.merge": simple_rename("Y.merge"),
     "YAHOO.lang.later": simple_rename("Y.later"),
     "YAHOO.lang.extend": simple_rename("Y.extend"),
+    "YAHOO.extend": simple_rename("Y.extend"),
+
     "YAHOO.lang.isUndefined": simple_rename("Y.Lang.isUndefined"),
     "YAHOO.lang.isValue": simple_rename("Y.Lang.isValue"),
     "YAHOO.lang.isArray": simple_rename("Y.Lang.isArray"),
@@ -28,6 +30,8 @@ var calleeHandlers = {
     "YAHOO.lang.isFunction": simple_rename("Y.Lang.isFunction"),
     "YAHOO.lang.isString": simple_rename("Y.Lang.isString"),
     "YAHOO.lang.isObject": simple_rename("Y.Lang.isObject"),
+    "YAHOO.lang.isNumber": simple_rename("Y.Lang.isNumber"),
+    "YAHOO.lang.isBoolean": simple_rename("Y.Lang.isBoolean"),
 
     "YAHOO.lang.JSON.parse": function (node, path) {
         node.callee = {
@@ -47,6 +51,17 @@ var calleeHandlers = {
 
 
 };
+
+
+
+var memberHandlers = {
+    "YAHOO.lang.JSON.useNativeStringify": function (node, path) {
+        node.type = "Identifier";
+        node.name = "// TODO: YAHOO.lang.JSON.useNativeStringify";
+    }
+};
+exports.memberHandlers = memberHandlers;
+
 
 
 // Alias handling

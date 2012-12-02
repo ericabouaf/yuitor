@@ -6,10 +6,13 @@ var esprima = require('esprima'),
 
 var calleeHandlers = {
 
-    // TODO: YAHOO.widget.Button
-    // TODO: YAHOO.widget.ButtonGroup
-    // TODO: YAHOO.widget.AutoComplete
-    // TODO: YAHOO.widget.Menu
+    "YAHOO.widget.AutoComplete": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.AutoComplete"
+        };
+        return ['autocomplete'];
+    },
 
     "YAHOO.widget.Menu": function (node, path) {
         node.callee = {
@@ -17,6 +20,23 @@ var calleeHandlers = {
             "name": "Y.Menu"
         };
         return ['menu'];
+    },
+
+    
+    "YAHOO.widget.Button": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.Button"
+        };
+        return ['button'];
+    },
+
+    "YAHOO.widget.ButtonGroup": function (node, path) {
+        node.callee = {
+            "type": "Identifier",
+            "name": "Y.ButtonGroup"
+        };
+        return ['button-group'];
     },
 
     "YAHOO.widget.Calendar": function (node, path) {
